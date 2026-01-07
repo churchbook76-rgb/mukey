@@ -1,0 +1,200 @@
+{
+  "analysis_timestamp": "2026-01-07T10:57:49.807383",
+  "data_file": "POPCATUSDT_merged_full.csv",
+  "analysis": {
+    "basic_info": {
+      "total_records": 92261,
+      "total_columns": 16,
+      "columns": [
+        "agg_trade_id",
+        "price",
+        "quantity",
+        "first_trade_id",
+        "last_trade_id",
+        "transact_time",
+        "is_buyer_maker",
+        "bucket_time",
+        "create_time",
+        "symbol",
+        "sum_open_interest",
+        "sum_open_interest_value",
+        "count_toptrader_long_short_ratio",
+        "sum_toptrader_long_short_ratio",
+        "count_long_short_ratio",
+        "sum_taker_long_short_vol_ratio"
+      ],
+      "memory_usage_mb": 31.320775032043457,
+      "date_range": {
+        "start": "2026-01-01 00:00:03.931000",
+        "end": "2026-01-02 23:59:32.020000",
+        "duration_hours": 47.99113583333334
+      }
+    },
+    "quality": {
+      "missing_values": {
+        "agg_trade_id": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "price": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "quantity": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "first_trade_id": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "last_trade_id": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "transact_time": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "is_buyer_maker": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "bucket_time": {
+          "count": 0,
+          "percentage": 0.0
+        },
+        "create_time": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "symbol": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "sum_open_interest": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "sum_open_interest_value": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "count_toptrader_long_short_ratio": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "sum_toptrader_long_short_ratio": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "count_long_short_ratio": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "sum_taker_long_short_vol_ratio": {
+          "count": 45,
+          "percentage": 0.048774671854846574
+        },
+        "transact_time_parsed": {
+          "count": 0,
+          "percentage": 0.0
+        }
+      },
+      "data_types": {
+        "agg_trade_id": "int64",
+        "price": "float64",
+        "quantity": "float64",
+        "first_trade_id": "int64",
+        "last_trade_id": "int64",
+        "transact_time": "object",
+        "is_buyer_maker": "bool",
+        "bucket_time": "object",
+        "create_time": "object",
+        "symbol": "object",
+        "sum_open_interest": "float64",
+        "sum_open_interest_value": "float64",
+        "count_toptrader_long_short_ratio": "float64",
+        "sum_toptrader_long_short_ratio": "float64",
+        "count_long_short_ratio": "float64",
+        "sum_taker_long_short_vol_ratio": "float64",
+        "transact_time_parsed": "datetime64[ns]"
+      },
+      "duplicate_records": 0
+    },
+    "trading_stats": {
+      "price": {
+        "min": 0.073,
+        "max": 0.0965,
+        "mean": 0.08685627946803091,
+        "median": 0.0897,
+        "std": 0.007820069212583528,
+        "range": 0.023500000000000007
+      },
+      "quantity": {
+        "min": 1.0,
+        "max": 1390653.0,
+        "mean": 6851.69149478111,
+        "median": 635.0,
+        "total": 632143909.0,
+        "std": 18569.147777688617
+      },
+      "buyer_maker_distribution": {
+        "False": 49771,
+        "True": 42490
+      },
+      "open_interest": {
+        "min": 44939336.0,
+        "max": 60702116.0,
+        "mean": 51928432.69236358,
+        "records_with_data": 92216
+      }
+    },
+    "temporal": {
+      "time_gaps": {
+        "mean_seconds": 1.8726218187730328,
+        "median_seconds": 0.83,
+        "max_seconds": 129.733
+      },
+      "trades_per_hour": {
+        "0": 1671,
+        "1": 1252,
+        "2": 1150,
+        "3": 1431,
+        "4": 1161,
+        "5": 2484,
+        "6": 2230,
+        "7": 1599,
+        "8": 3936,
+        "9": 8935,
+        "10": 6881,
+        "11": 6002,
+        "12": 7155,
+        "13": 6544,
+        "14": 6263,
+        "15": 4834,
+        "16": 4788,
+        "17": 4216,
+        "18": 4723,
+        "19": 2239,
+        "20": 2159,
+        "21": 2580,
+        "22": 3510,
+        "23": 4518
+      }
+    },
+    "insights": {
+      "vwap": 0.08943001929059163,
+      "large_trades": {
+        "threshold_95_percentile": 33031.0,
+        "count": 4613,
+        "percentage": 4.999945805920161
+      },
+      "volatility": {
+        "std_returns": 0.0007142568590115075,
+        "max_increase": 0.007368421052631469,
+        "max_decrease": -0.012500000000000067
+      }
+    }
+  }
+}
