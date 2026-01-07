@@ -12,6 +12,13 @@ from datetime import datetime
 import json
 
 
+def parse_transact_time(df):
+    """Parse transact_time column if not already parsed."""
+    if 'transact_time_parsed' not in df.columns and 'transact_time' in df.columns:
+        df['transact_time_parsed'] = pd.to_datetime(df['transact_time'], errors='coerce')
+    return df
+
+
 def load_data(filepath):
     """Load the CSV data file."""
     print(f"Loading data from {filepath}...")
@@ -36,7 +43,7 @@ def basic_info(df):
     
     # Parse transact_time if available
     if 'transact_time' in df.columns:
-        df['transact_time_parsed'] = pd.to_datetime(df['transact_time'], errors='coerce')
+        df = parse_transact_time(df)
         valid_times = df['transact_time_parsed'].dropna()
         if len(valid_times) > 0:
             info["date_range"] = {
@@ -186,7 +193,7 @@ def temporal_analysis(df):
     temporal_stats = {}
     
     if 'transact_time' in df.columns:
-        df['transact_time_parsed'] = pd.to_datetime(df['transact_time'], errors='coerce')
+        df = parse_transact_time(df)
         valid_times = df[df['transact_time_parsed'].notna()].copy()
         
         if len(valid_times) > 0:
@@ -194,10 +201,13 @@ def temporal_analysis(df):
             valid_times = valid_times.sort_values('transact_time_parsed')
             time_diffs = valid_times['transact_time_parsed'].diff()
             
+            # Convert to seconds once to avoid redundant computation
+            time_diffs_seconds = time_diffs.dt.total_seconds()
+            
             temporal_stats["time_gaps"] = {
-                "mean_seconds": float(time_diffs.dt.total_seconds().mean()),
-                "median_seconds": float(time_diffs.dt.total_seconds().median()),
-                "max_seconds": float(time_diffs.dt.total_seconds().max())
+                "mean_seconds": float(time_diffs_seconds.mean()),
+                "median_seconds": float(time_diffs_seconds.median()),
+                "max_seconds": float(time_diffs_seconds.max())
             }
             
             print("\nTime Gaps Between Trades:")
@@ -208,7 +218,7 @@ def temporal_analysis(df):
             # Trades per hour
             valid_times['hour'] = valid_times['transact_time_parsed'].dt.hour
             trades_per_hour = valid_times.groupby('hour').size()
-            temporal_stats["trades_per_hour"] = {int(k): int(v) for k, v in trades_per_hour.items()}
+            temporal_stats["trades_per_hour"] = trades_per_hour.to_dict()
             
             print("\nTrades by Hour of Day:")
             for hour, count in trades_per_hour.items():
@@ -229,9 +239,10 @@ def market_insights(df):
     if 'price' in df.columns and 'quantity' in df.columns:
         total_value = (df['price'] * df['quantity']).sum()
         total_quantity = df['quantity'].sum()
-        vwap = total_value / total_quantity if total_quantity > 0 else 0
-        insights["vwap"] = float(vwap)
-        print(f"\nVolume-Weighted Average Price (VWAP): {vwap:.6f}")
+        vwap = total_value / total_quantity if total_quantity > 0 else np.nan
+        insights["vwap"] = float(vwap) if not np.isnan(vwap) else None
+        if not np.isnan(vwap):
+            print(f"\nVolume-Weighted Average Price (VWAP): {vwap:.6f}")
     
     # Large trades analysis
     if 'quantity' in df.columns:
